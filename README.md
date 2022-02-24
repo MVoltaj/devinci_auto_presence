@@ -24,6 +24,8 @@ You need to input in the data.json file your credentials.
 To run it, go to the directory where you downloaded it, open cmd and type "python main.py".
 If it doesn"t work, you might try python3 main.py
 
+You can also download the .exe here : https://drive.google.com/file/d/1anKjZO21YgjW1pUlBuSRC2Bi1FeHs3ej/view?usp=sharing
+
 This will auto check your presence
 
 An optimized V2 version will come soon, including a better flow, better handling and cleaner code.
