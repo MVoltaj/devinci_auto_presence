@@ -23,4 +23,7 @@ You need to input in the data.json file your credentials.
 
 
 This will auto check your presence
+
+An optimized V2 version will come soon...
+
 If you find any bugs or have any questions, you can contact me at MVoltaj#6005
