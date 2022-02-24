@@ -24,7 +24,7 @@ Library :
 To install them, run in your cmd : pip install requests, pip install datetime, etc...
 
 You need to input in the data.json file your credentials.
-- Login
+- Email
 - Password
 - Delay ( in seconds)
 
