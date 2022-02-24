@@ -74,7 +74,6 @@ if "SAMLResponse" in login_req.text:
     relaystate = re.findall(r'RelayState" value="(.*?)"',login_req.text)[0]
 
 
-
 saml_post = s.post(url="https://www.leonard-de-vinci.net/include/SAML/module.php/saml/sp/saml2-acs.php/devinci-sp",data = {"SAMLResponse" : saml_response,"RelayState":relaystate})
 if "Office 365" in saml_post.text:
     print(actual_time() + " - Successfully Logged in")
@@ -102,7 +101,7 @@ print(actual_time() + " - Starting Monitoring")
 while True:
     get_presence = s.get(url="https://www.leonard-de-vinci.net/student/presences/")
     links_presence = re.findall(r'<td><a href="/student/presences/(.*?)"',get_presence.text)
-
+    last_class = False
 
     #Compteur is a random value, assigned to 50 just because you will never have 50 course in a day
     presence_order_in_html = 50
@@ -125,13 +124,8 @@ while True:
                                        int(time_next_class[0]), int(time_next_class[1]), 0, 0)
             second_before_next_class = (next_class_date - datetime.now()).total_seconds()
         except IndexError:
-            send_presence = s.post(url=presence_url, data={"act": "set_present", "seance_pk": presence_id})
-            if "present" in send_presence.text:
-                print(Fore.RED + (actual_time() + " - Successfully checked presence for : " + info_seance[
-                    presence_order_in_html * 3] + " " + info_seance[presence_order_in_html * 3 + 1] + " " + info_seance[
-                          presence_order_in_html * 3 + 2]))
-            print("No more class after this one")
-            break
+            last_class = True
+            print(actual_time() + " - No more class after this one")
 
         get_presence_page = s.get(url ="https://www.leonard-de-vinci.net/student/presences/" + presence_id)
         send_presence = s.post(url=presence_url, data={"act":"set_present","seance_pk":presence_id})
@@ -140,23 +134,26 @@ while True:
 
         if "present" in send_presence.text:
             print(Fore.GREEN +(actual_time() + " - Successfully checked presence for : " + info_seance[presence_order_in_html * 3] + " " + info_seance[presence_order_in_html * 3 + 1] + " " + info_seance[presence_order_in_html * 3 + 2]))
-
-            print(actual_time() + " - Waiting until " + str(next_class_date.hour) +":" + str(next_class_date.minute))
-            pause.until(next_class_date)
-            #time.sleep(second_before_next_class)
-        elif "Validation Impossible":
+            if last_class:
+                break
+            else:
+                print(actual_time() + " - Waiting until " + str(next_class_date.hour) +":" + str(next_class_date.minute))
+                pause.until(next_class_date)
+        else:
 
             print(Fore.RED + (actual_time() + " - Validation Impossible " + check_status(get_presence_page.text)))
             if "clôturé" in check_status(get_presence_page.text) or "noté présent" in check_status(get_presence_page.text):
-                print(actual_time() + " - Waiting until " + str(next_class_date.hour) +":" + str(next_class_date.minute))
-                pause.until(next_class_date)
-                #time.sleep(second_before_next_class)
-
+                if last_class:
+                    break
+                else:
+                    print(actual_time() + " - Waiting until " + str(next_class_date.hour) +":" + str(next_class_date.minute))
+                    pause.until(next_class_date)
             else:
                 time.sleep(delay)
     else:
         print(actual_time() + " - No Presence Activated - Waiting " + str(delay)+ " seconds")
         time.sleep(delay)
+
 
 
 
