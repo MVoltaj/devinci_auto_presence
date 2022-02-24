@@ -26,7 +26,7 @@ If it doesn"t work, you might try python3 main.py
 
 This will auto check your presence
 
-An optimized V2 version will come soon, including a better flow and better handling.
+An optimized V2 version will come soon, including a better flow, better handling and cleaner code.
 
 
 If you find any bugs or have any questions, you can contact me at MVoltaj#6005
