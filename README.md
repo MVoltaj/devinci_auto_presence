@@ -21,7 +21,7 @@ You need to input in the data.json file your credentials.
 - Password
 - Delay ( in seconds)
 
-To run it, go to the directory where you downloaded it, open cmd and type python main.py.
+To run it, go to the directory where you downloaded it, open cmd and type "python main.py".
 If it doesn"t work, you might try python3 main.py
 
 This will auto check your presence
