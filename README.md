@@ -1,6 +1,13 @@
 # devinci_auto_presence
 A little program to automatically check presence for you
 
+*How it works*
+
+- Login into your account on devinci portail website
+- If there is a presence it will check it, and wait until your next class
+- If presence is closed, it will wait until your next class
+- if presence is not opened, it will check every x seconds (delay you define) if it got opened, and when it opens, it checks it
+
 Requirements:
 
 ¨- Python 3
