@@ -8,7 +8,7 @@ A little program to automatically check presence for you
 - If presence is closed, it will wait until your next class
 - if presence is not opened, it will check every x seconds (delay you define) if it got opened, and when it opens, it checks it
 
-.EXE Download Link : https://drive.google.com/file/d/1anKjZO21YgjW1pUlBuSRC2Bi1FeHs3ej/view?usp=sharing
+.EXE Download Link : https://drive.google.com/file/d/1Xz-zuVQJ-Cp9yLBaaje5ZKqgoUG95vD4/view?usp=sharing
 
 Requirements:
 
